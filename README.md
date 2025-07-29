@@ -59,99 +59,72 @@ This project focuses on predicting house prices using machine learning technique
 
 3. **Install required packages**
    ```bash
-   pip install -r requirements.txt
+   pip install pandas numpy scikit-learn matplotlib seaborn
    ```
 
-   Or install packages manually:
+   Common dependencies for house price prediction:
    ```bash
-   pip install pandas numpy scikit-learn xgboost matplotlib seaborn plotly jupyter
+   pip install pandas numpy scikit-learn matplotlib seaborn plotly
    ```
 
 ## 💻 Usage
 
-### Quick Start
-
-```python
-import pandas as pd
-from house_price_predictor import HousePricePredictor
-
-# Load the trained model
-predictor = HousePricePredictor()
-predictor.load_model('models/best_model.pkl')
-
-# Predict house price
-house_features = {
-    'bedrooms': 3,
-    'bathrooms': 2,
-    'sqft_living': 1800,
-    'sqft_lot': 7200,
-    'floors': 2,
-    'waterfront': 0,
-    'view': 0,
-    'condition': 3,
-    'grade': 7,
-    'yr_built': 1995
-}
-
-predicted_price = predictor.predict(house_features)
-print(f"Predicted House Price: ${predicted_price:,.2f}")
-```
-
-### Running the Complete Pipeline
+### Running the Project
 
 ```bash
-python main.py
+python code.py
 ```
 
 This will:
-- Load and preprocess the housing dataset
-- Perform exploratory data analysis
-- Train multiple machine learning models
-- Evaluate model performance
-- Generate visualizations and reports
+- Load and preprocess the housing data from `data.csv`
+- Train the house price prediction model
+- Generate predictions and save results to `output.csv`
+- Display model performance metrics and analysis
 
-### Jupyter Notebook Analysis
+### Input/Output Files
 
-```bash
-jupyter notebook analysis.ipynb
-```
+- **Input**: `data.csv` - Housing dataset with property features
+- **Processing**: `data.dat` - Intermediate processed data
+- **Output**: `output.csv` - Predicted house prices and results
 
-The notebook contains:
-- Detailed data exploration
-- Feature correlation analysis
-- Model comparison visualizations
-- Interactive prediction interface
+### Basic Usage Example
+
+```python
+import pandas as pd
+
+# Load the dataset
+data = pd.read_csv('data.csv')
+
+# Run the prediction model
+# (Your implementation in code.py)
+
+# View results
+results = pd.read_csv('output.csv')
+print("House Price Predictions:")
+print(results.head())
 
 ## 📊 Dataset
 
-The project uses a comprehensive housing dataset containing the following features:
+The project uses a housing dataset (`data.csv`) containing property information for price prediction:
 
-### Property Features
-- **bedrooms**: Number of bedrooms
-- **bathrooms**: Number of bathrooms
-- **sqft_living**: Square footage of living space
-- **sqft_lot**: Square footage of lot
-- **floors**: Number of floors
-- **waterfront**: Waterfront property (0/1)
-- **view**: Quality of view (0-4 scale)
-- **condition**: Overall condition (1-5 scale)
-- **grade**: Overall grade (1-13 scale)
-- **sqft_above**: Square footage above ground
-- **sqft_basement**: Square footage of basement
-- **yr_built**: Year built
-- **yr_renovated**: Year renovated
-- **zipcode**: ZIP code
-- **lat**: Latitude coordinate
-- **long**: Longitude coordinate
+### Dataset Overview
+- **File**: `data.csv` (515 KB)
+- **Processing**: `data.dat` (1,681 KB) - intermediate processed data
+- **Output**: `output.csv` (515 KB) - prediction results
 
-### Target Variable
-- **price**: Sale price of the house (target variable)
+### Expected Features
+The dataset likely contains typical housing features such as:
+- **Property Size**: Square footage, lot size, number of rooms
+- **Location**: Geographic indicators, neighborhood information
+- **Property Details**: Age, condition, amenities, property type
+- **Market Factors**: Historical prices, market trends
 
-### Dataset Statistics
-- **Total Records**: 21,613 house sales
-- **Features**: 19 input features
-- **Price Range**: $75,000 - $7,700,000
-- **Time Period**: May 2014 - May 2015
+### Data Flow
+```
+data.csv → code.py → data.dat → output.csv
+   ↓         ↓         ↓         ↓
+ Raw Data → Process → Cache → Results
+```
 
 ## 🔬 Model Performance
 
@@ -214,52 +187,30 @@ The project uses a comprehensive housing dataset containing the following featur
 ```
 codecraft_task1/
 │
-├── data/
-│   ├── house_data.csv           # Raw housing dataset
-│   ├── processed_data.csv       # Cleaned and processed data
-│   └── data_description.txt     # Dataset documentation
-│
-├── src/
-│   ├── house_price_predictor.py # Main prediction class
-│   ├── data_preprocessing.py    # Data cleaning and preparation
-│   ├── feature_engineering.py   # Feature creation and selection
-│   ├── model_training.py        # Model training and evaluation
-│   └── visualization.py         # Plotting and visualization functions
-│
-├── models/
-│   ├── linear_regression.pkl    # Trained Linear Regression model
-│   ├── random_forest.pkl        # Trained Random Forest model
-│   ├── xgboost_model.pkl        # Trained XGBoost model
-│   └── best_model.pkl           # Best performing model
-│
-├── notebooks/
-│   ├── exploratory_analysis.ipynb  # Data exploration notebook
-│   ├── model_comparison.ipynb      # Model comparison analysis
-│   └── results_visualization.ipynb # Results and insights
-│
-├── results/
-│   ├── plots/                   # Generated visualizations
-│   ├── model_metrics.json       # Performance metrics
-│   └── feature_importance.csv   # Feature importance scores
-│
-├── tests/
-│   ├── test_preprocessing.py    # Data preprocessing tests
-│   ├── test_models.py          # Model functionality tests
-│   └── test_predictions.py     # Prediction accuracy tests
-│
-├── main.py                     # Main execution script
-├── requirements.txt            # Project dependencies
-├── config.py                   # Configuration settings
-└── README.md                   # This file
+├── .git/                    # Git repository files
+├── __pycache__/            # Python cache files
+├── code.py                 # Main house price prediction implementation (3 KB)
+├── data.csv                # Housing dataset (515 KB)
+├── data.dat                # Processed/intermediate data (1,681 KB)
+├── output.csv              # Prediction results and output (515 KB)
+└── README.md               # This file
 ```
+
+### File Descriptions
+
+- **`code.py`**: Contains the main machine learning implementation for house price prediction
+- **`data.csv`**: Original housing dataset with property features and prices
+- **`data.dat`**: Intermediate file storing processed or cached data during execution
+- **`output.csv`**: Generated results file containing predicted prices and model outputs
 
 ## 🔮 Future Improvements
 
+- **Enhanced Features**: Add more property characteristics and neighborhood data
+- **Model Optimization**: Experiment with advanced algorithms like Neural Networks
 - **Real-time Data**: Integration with real estate APIs for current market data
-- **Advanced Features**: Include neighborhood demographics and economic indicators
-- **Deep Learning**: Implement neural networks for potentially better accuracy
+- **Visualization**: Add interactive plots and charts for better insights
 - **Web Interface**: Create a user-friendly web application for predictions
-- **Time Series**: Add temporal analysis for price trend predictions
+- **Model Persistence**: Save and load trained models for reuse
 
 ## 🤝 Contributing
 
@@ -286,7 +237,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Sanjeevni** - [sanju234-san](https://github.com/sanju234-san)
+**Sanju** - [sanju234-san](https://github.com/sanju234-san)
 
 ## 🙏 Acknowledgments
 
@@ -299,3 +250,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions or suggestions, please:
 - Open an issue on GitHub
+- Connect on LinkedIn
+- Email: [your-email@example.com]
+
+---
+
+⭐ **If this project helped you, please give it a star!** ⭐
+
+*Happy house hunting! 🏠*
